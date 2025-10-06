@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Pages/HomePage.dart';
+import 'package:myapp/util/RouteGenerator.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,6 +8,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/",
+      onGenerateRoute: Routegenerator.generateRoute,
+    );
   }
 }
