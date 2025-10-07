@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:myapp/Model/ShoeModel.dart';
 import 'package:myapp/util/RouteGenerator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ShoeModelAdapter());
+
+  await Hive.openBox("cartTotal");
+  await Hive.openBox<ShoeModel>("inventory");
+  await Hive.openBox<ShoeModel>("cart");
+
   runApp(MyApp());
 }
 

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:myapp/Components/ProductTile.dart';
 import 'package:myapp/Components/SearchBox.dart';
 import 'package:myapp/Data/Database.dart';
-import 'package:myapp/Model/CartModel.dart';
+import 'package:myapp/Model/ShoeModel.dart';
 
 class ShopPage extends StatefulWidget {
   Database db;
-  CartModel cart;
-  ShopPage(this.db, this.cart);
+  List<ShoeModel>? list;
+  ShopPage(this.db) {
+    this.list = db.getInventory;
+  }
 
   @override
   State<ShopPage> createState() => ShopPageState();
@@ -62,12 +64,9 @@ class ShopPageState extends State<ShopPage> {
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: widget.db.getProducts.length,
+                itemCount: widget.list!.length,
                 itemBuilder: (context, index) {
-                  return ProductTile(
-                    product: widget.db.getProducts[index],
-                    cart: widget.cart,
-                  );
+                  return ProductTile(widget.db, widget.list![index]);
                 },
               ),
             ),

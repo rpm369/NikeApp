@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/Components/ConformDialog.dart';
-import 'package:myapp/Model/CartModel.dart';
+import 'package:myapp/Data/Database.dart';
 import 'package:myapp/Model/ShoeModel.dart';
 
 class ProductTile extends StatelessWidget {
+  final Database db;
   final ShoeModel product;
-  final CartModel cart;
-  const ProductTile({required this.product, required this.cart});
+  const ProductTile(this.db, this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class ProductTile extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () async {
-                  cart.addProduct(product);
+                  await db.addProduct(product);
                   await showDialog(
                     context: context,
                     builder: (_) {

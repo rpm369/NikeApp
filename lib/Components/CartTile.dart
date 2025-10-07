@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Data/Database.dart';
 import 'package:myapp/Model/ShoeModel.dart';
 
 class CartTile extends StatelessWidget {
   final ShoeModel product;
-  final void Function(ShoeModel) deleteShoe;
-  const CartTile(this.product, this.deleteShoe);
+  final Database db;
+  final VoidCallback changeState;
+  const CartTile(this.db, this.product, this.changeState);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +48,9 @@ class CartTile extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {
-                deleteShoe(product);
+              onPressed: () async {
+                await db.removeProduct(product);
+                changeState();
               },
               icon: Icon(Icons.delete, color: Colors.grey, size: 30),
               style: IconButton.styleFrom(overlayColor: Colors.transparent),

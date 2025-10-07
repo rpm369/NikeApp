@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/Components/CartTile.dart';
-import 'package:myapp/Model/CartModel.dart';
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:myapp/Data/Database.dart';
 
 class CartPage extends StatefulWidget {
-  CartModel cart;
-  CartPage(this.cart);
+  Database db;
+  CartPage(this.db);
 
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
-  void deleteProduct(ShoeModel product) {
-    setState(() {
-      widget.cart.getCart.remove(product);
-    });
+  void changeState() {
+    setState(() {});
   }
 
   @override
@@ -29,9 +26,13 @@ class _CartPageState extends State<CartPage> {
           Text("My Cart", style: TextStyle(color: Colors.black, fontSize: 30)),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.cart.getCart.length,
+              itemCount: widget.db.getCartLength,
               itemBuilder: (context, index) {
-                return CartTile(widget.cart.getCart[index], deleteProduct);
+                return CartTile(
+                  widget.db,
+                  widget.db.getShoeModelAt(index),
+                  changeState,
+                );
               },
             ),
           ),
@@ -39,7 +40,7 @@ class _CartPageState extends State<CartPage> {
             padding: EdgeInsets.symmetric(vertical: 15),
             alignment: Alignment.center,
             child: Text(
-              "\$ PAY",
+              "\$ ${widget.db.getCartTotal}",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,
