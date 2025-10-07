@@ -1,104 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Components/ProductTile.dart';
-import 'package:myapp/Components/SearchBox.dart';
-import 'package:myapp/Components/SideDrawer.dart';
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:myapp/Components/BottomNavBar.dart';
+import 'package:myapp/Components/MyDrawer.dart';
+import 'package:myapp/Data/Database.dart';
+import 'package:myapp/Model/CartModel.dart';
+import 'package:myapp/Pages/CartPage.dart';
+import 'package:myapp/Pages/ShopPage.dart';
 
 class HomePage extends StatefulWidget {
-  State<StatefulWidget> createState() {
-    return HomePageState();
-  }
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
-  List<ShoeModel> shoesList = [
-    ShoeModel(
-      "assets/ShoeImages/Shoe1.png",
-      "Nike Air Jordan",
-      "Very good Shoe",
-      400,
-    ),
-  ];
+class _HomePageState extends State<HomePage> {
+  late List pages;
+
+  int index = 0;
+
+  @override
+  void initState() {
+    Database db = Database.getInstance;
+    CartModel cart = CartModel.getInstance;
+    pages = [ShopPage(db, cart), CartPage(cart)];
+  }
+
+  void changePage(int newIndex) {
+    setState(() {
+      index = newIndex;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey[300],
-      appBar: AppBar(backgroundColor: Colors.transparent),
-      drawer: SideDrawer(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsetsGeometry.only(
-              left: 25,
-              right: 25,
-              top: 15,
-              bottom: 40,
-            ),
-            child: SearchBox(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Builder(
+            builder: (newContext) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(newContext).openDrawer();
+                },
+                icon: Icon(Icons.menu_open, color: Colors.black, size: 30),
+                style: IconButton.styleFrom(overlayColor: Colors.transparent),
+              );
+            },
           ),
-          Text(
-            "Everyone flies ! Some fly longer than others",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey, fontSize: 13),
-          ),
-          Padding(
-            padding: EdgeInsetsGeometry.only(
-              left: 25,
-              right: 25,
-              top: 35,
-              bottom: 20,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Hot Picks 🔥",
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-                Text(
-                  "See all",
-                  style: TextStyle(color: Colors.grey, fontSize: 15),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsetsGeometry.only(left: 25),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [ProductTile(product: shoesList[0])],
-              ),
-            ),
-          ),
-          Divider(
-            color: Colors.white,
-            thickness: 2,
-            indent: 20,
-            endIndent: 20,
-            height: 30,
-          ),
-        ],
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blue,
-        currentIndex: 1,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people, color: Colors.black, size: 30),
-            label: "A",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings, color: Colors.black, size: 30),
-            label: "B",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Colors.black, size: 30),
-            label: "C",
-          ),
-        ],
-      ),
+      drawer: Mydrawer(),
+      body: pages[index],
+      bottomNavigationBar: BottomNavBar(changePage),
     );
   }
 }

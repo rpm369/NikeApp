@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Components/ConformDialog.dart';
+import 'package:myapp/Model/CartModel.dart';
 import 'package:myapp/Model/ShoeModel.dart';
 
 class ProductTile extends StatelessWidget {
   final ShoeModel product;
-  const ProductTile({required this.product});
+  final CartModel cart;
+  const ProductTile({required this.product, required this.cart});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 320,
+      width: 300,
       padding: EdgeInsets.all(0),
-      margin: EdgeInsets.only(right: 10),
+      margin: EdgeInsets.only(left: 25, right: 5),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -22,14 +25,17 @@ class ProductTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
-              // spacing: 10,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(product.getURL, height: 250, width: 250),
+                Center(
+                  child: Image.asset(product.getURL, height: 250, width: 250),
+                ),
                 const SizedBox(height: 10),
                 Text(
                   product.getDiscription,
                   textAlign: TextAlign.start,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(color: Colors.grey, fontSize: 15),
                 ),
               ],
@@ -39,25 +45,43 @@ class ProductTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.getName,
-                      style: const TextStyle(color: Colors.black, fontSize: 30),
-                    ),
-                    Text(
-                      product.getPrice,
-                      style: const TextStyle(color: Colors.grey, fontSize: 15),
-                    ),
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.getName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                        ),
+                      ),
+                      Text(
+                        product.getPrice,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  cart.addProduct(product);
+                  await showDialog(
+                    context: context,
+                    builder: (_) {
+                      return ConformDialog(product.getName);
+                    },
+                  );
+                },
                 icon: Icon(Icons.add, size: 30, color: Colors.white),
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.black,
