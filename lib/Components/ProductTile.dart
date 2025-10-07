@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Components/ConformDialog.dart';
-import 'package:myapp/Data/Database.dart';
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:nikeapp/Components/ConformDialog.dart';
+import 'package:nikeapp/Data/Database.dart';
+import 'package:nikeapp/Model/ShoeModel.dart';
 
 class ProductTile extends StatelessWidget {
   final Database db;

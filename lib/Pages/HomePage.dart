@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Components/BottomNavBar.dart';
-import 'package:myapp/Components/MyDrawer.dart';
-import 'package:myapp/Data/Database.dart';
-import 'package:myapp/Pages/CartPage.dart';
-import 'package:myapp/Pages/ShopPage.dart';
+import 'package:nikeapp/Components/BottomNavBar.dart';
+import 'package:nikeapp/Components/MyDrawer.dart';
+import 'package:nikeapp/Data/Database.dart';
+import 'package:nikeapp/Pages/CartPage.dart';
+import 'package:nikeapp/Pages/ShopPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:myapp/Data/ConstData.dart';
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:nikeapp/Data/ConstData.dart';
+import 'package:nikeapp/Model/ShoeModel.dart';
 
 class Database {
   static Database? _instance;

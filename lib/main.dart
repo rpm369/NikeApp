@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:myapp/Model/ShoeModel.dart';
-import 'package:myapp/util/RouteGenerator.dart';
+import 'package:nikeapp/Model/ShoeModel.dart';
+import 'package:nikeapp/util/RouteGenerator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

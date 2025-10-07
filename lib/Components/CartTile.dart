@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Data/Database.dart';
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:nikeapp/Data/Database.dart';
+import 'package:nikeapp/Model/ShoeModel.dart';
 
 class CartTile extends StatelessWidget {
   final ShoeModel product;

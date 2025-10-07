@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Components/ProductTile.dart';
-import 'package:myapp/Components/SearchBox.dart';
-import 'package:myapp/Data/Database.dart';
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:nikeapp/Components/ProductTile.dart';
+import 'package:nikeapp/Components/SearchBox.dart';
+import 'package:nikeapp/Data/Database.dart';
+import 'package:nikeapp/Model/ShoeModel.dart';
 
 class ShopPage extends StatefulWidget {
   Database db;

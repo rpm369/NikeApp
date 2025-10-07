@@ -1,4 +1,4 @@
-# Myapp - A Flutter E-commerce Application
+# NikeApp - A Flutter E-commerce Application
 
 ## Description
 Myapp is a modern Flutter e-commerce application designed to showcase products, manage a shopping cart, and provide a seamless user experience. It leverages local data storage using Hive for efficient offline capabilities and a custom Google-style navigation bar for intuitive navigation.

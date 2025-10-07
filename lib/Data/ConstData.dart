@@ -1,4 +1,4 @@
-import 'package:myapp/Model/ShoeModel.dart';
+import 'package:nikeapp/Model/ShoeModel.dart';
 
 class ConstData {
   static List<ShoeModel> get pull {

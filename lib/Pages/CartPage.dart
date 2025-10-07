@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Components/CartTile.dart';
-import 'package:myapp/Data/Database.dart';
+import 'package:nikeapp/Components/CartTile.dart';
+import 'package:nikeapp/Data/Database.dart';
 
 class CartPage extends StatefulWidget {
   Database db;
