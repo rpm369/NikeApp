@@ -3,14 +3,9 @@ import 'package:nikeapp/Components/ProductTile.dart';
 import 'package:nikeapp/Components/SearchBox.dart';
 import 'package:nikeapp/Data/Database.dart';
 import 'package:nikeapp/Model/ShoeModel.dart';
+import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
-  Database db;
-  List<ShoeModel>? list;
-  ShopPage(this.db) {
-    this.list = db.getInventory;
-  }
-
   @override
   State<ShopPage> createState() => ShopPageState();
 }
@@ -18,6 +13,8 @@ class ShopPage extends StatefulWidget {
 class ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
+    List<ShoeModel> list = Provider.of<Database>(context).getInventory;
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -64,9 +61,9 @@ class ShopPageState extends State<ShopPage> {
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: widget.list!.length,
+                itemCount: list.length,
                 itemBuilder: (context, index) {
-                  return ProductTile(widget.db, widget.list![index]);
+                  return ProductTile(list[index]);
                 },
               ),
             ),

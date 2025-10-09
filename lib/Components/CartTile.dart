@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nikeapp/Data/Database.dart';
 import 'package:nikeapp/Model/ShoeModel.dart';
+import 'package:provider/provider.dart';
 
 class CartTile extends StatelessWidget {
   final ShoeModel product;
-  final Database db;
   final VoidCallback changeState;
-  const CartTile(this.db, this.product, this.changeState);
+  const CartTile(this.product, this.changeState);
 
   @override
   Widget build(BuildContext context) {
+    Database db = Provider.of<Database>(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       margin: EdgeInsets.symmetric(vertical: 10),

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:nikeapp/Components/ConformDialog.dart';
 import 'package:nikeapp/Data/Database.dart';
 import 'package:nikeapp/Model/ShoeModel.dart';
+import 'package:provider/provider.dart';
 
 class ProductTile extends StatelessWidget {
-  final Database db;
   final ShoeModel product;
-  const ProductTile(this.db, this.product);
+  const ProductTile(this.product);
 
   @override
   Widget build(BuildContext context) {
+    Database db = Provider.of<Database>(context);
     return Container(
       width: 300,
       padding: EdgeInsets.all(0),

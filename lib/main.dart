@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:nikeapp/Data/Database.dart';
 import 'package:nikeapp/Model/ShoeModel.dart';
 import 'package:nikeapp/util/RouteGenerator.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +14,15 @@ void main() async {
   await Hive.openBox<ShoeModel>("inventory");
   await Hive.openBox<ShoeModel>("cart");
 
-  runApp(MyApp());
+  runApp(
+    FutureProvider(
+      initialData: null,
+      create: (context) async {
+        return await Database.getInstance;
+      },
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

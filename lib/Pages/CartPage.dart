@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nikeapp/Components/CartTile.dart';
 import 'package:nikeapp/Data/Database.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
-  Database db;
-  CartPage(this.db);
-
   @override
   State<CartPage> createState() => _CartPageState();
 }
@@ -17,6 +15,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    Database db = Provider.of<Database>(context);
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
       child: Column(
@@ -26,13 +25,9 @@ class _CartPageState extends State<CartPage> {
           Text("My Cart", style: TextStyle(color: Colors.black, fontSize: 30)),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.db.getCartLength,
+              itemCount: db.getCartLength,
               itemBuilder: (context, index) {
-                return CartTile(
-                  widget.db,
-                  widget.db.getShoeModelAt(index),
-                  changeState,
-                );
+                return CartTile(db.getShoeModelAt(index), changeState);
               },
             ),
           ),
@@ -40,7 +35,7 @@ class _CartPageState extends State<CartPage> {
             padding: EdgeInsets.symmetric(vertical: 15),
             alignment: Alignment.center,
             child: Text(
-              "\$ ${widget.db.getCartTotal}",
+              "\$ ${db.getCartTotal}",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,

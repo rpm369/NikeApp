@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nikeapp/Components/BottomNavBar.dart';
 import 'package:nikeapp/Components/MyDrawer.dart';
-import 'package:nikeapp/Data/Database.dart';
 import 'package:nikeapp/Pages/CartPage.dart';
 import 'package:nikeapp/Pages/ShopPage.dart';
 
@@ -22,62 +21,37 @@ class _HomePageState extends State<HomePage> {
 
   List? pages;
 
-  Database? db;
-
   @override
   void initState() {
-    initDb();
-  }
-
-  void initDb() async {
-    db = await Database.getInstance;
-    setState(() {
-      pages = [ShopPage(db!), CartPage(db!)];
-    });
+    pages = [ShopPage(), CartPage()];
   }
 
   @override
   Widget build(BuildContext context) {
-    return (db == null)
-        ? Scaffold(
-            backgroundColor: Colors.grey,
-            body: Center(
-              child: CircularProgressIndicator(
-                color: Colors.black,
-                backgroundColor: Colors.transparent,
-              ),
-            ),
-          )
-        : Scaffold(
-            resizeToAvoidBottomInset: true,
-            backgroundColor: Colors.grey[300],
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              automaticallyImplyLeading: false,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Builder(
-                  builder: (newContext) {
-                    return IconButton(
-                      onPressed: () {
-                        Scaffold.of(newContext).openDrawer();
-                      },
-                      icon: Icon(
-                        Icons.menu_open,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      style: IconButton.styleFrom(
-                        overlayColor: Colors.transparent,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            drawer: Mydrawer(),
-            body: pages![index],
-            bottomNavigationBar: BottomNavBar(changePage),
-          );
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.grey[300],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Builder(
+            builder: (newContext) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(newContext).openDrawer();
+                },
+                icon: Icon(Icons.menu_open, color: Colors.black, size: 30),
+                style: IconButton.styleFrom(overlayColor: Colors.transparent),
+              );
+            },
+          ),
+        ),
+      ),
+      drawer: Mydrawer(),
+      body: pages![index],
+      bottomNavigationBar: BottomNavBar(changePage),
+    );
   }
 }
