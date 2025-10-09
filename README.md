@@ -13,6 +13,7 @@ Myapp is a modern Flutter e-commerce application designed to showcase products, 
 
 ## Tech Stack
 - **Flutter**: UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+- **Provider**: A simple yet powerful state management solution for Flutter.
 - **Hive**: A fast, lightweight, and powerful NoSQL database for Flutter and Dart.
 - **google_nav_bar**: A beautiful and customizable Google style navigation bar for Flutter.
 - **cupertino_icons**: iOS-style icons for Flutter.
